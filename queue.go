@@ -14,7 +14,7 @@ func New(cap int) Queuer {
 	return make(Queue, 0, cap)
 }
 
-func (q Queue) Enqueue(items ...interface{}) Queue {
+func (q Queue) Enqueue(items ...interface{}) Queuer {
 	// Truncate queue
 	if rand.Intn(TruncFreq) == TruncFreq/2 {
 		q = append(make(Queue, 0, 2*(len(q)+len(items))), q...)
@@ -22,7 +22,7 @@ func (q Queue) Enqueue(items ...interface{}) Queue {
 	return append(q, items...)
 }
 
-func (q Queue) Dequeue(items []interface{}) (Queue, int) {
+func (q Queue) Dequeue(items []interface{}) (Queuer, int) {
 	count := copy(items, q)
 	return q[count:], count
 }
