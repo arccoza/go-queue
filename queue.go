@@ -3,7 +3,7 @@ package queue
 import (
 	// "fmt"
 	"math/rand"
-	"github.com/k0kubun/pp"
+	// "github.com/k0kubun/pp"
 )
 
 var TruncFreq int = 33
@@ -16,8 +16,8 @@ func New(cap int) Queuer {
 
 func (q Queue) Enqueue(items ...interface{}) Queue {
 	// Truncate queue
-	if rand.Intn(TruncFreq) == TruncFreq / 2 {
-		q = append(make(Queue, 0, 2 * (len(q) + len(items))), q...)
+	if rand.Intn(TruncFreq) == TruncFreq/2 {
+		q = append(make(Queue, 0, 2*(len(q)+len(items))), q...)
 	}
 	return append(q, items...)
 }
@@ -32,7 +32,7 @@ func (q Queue) First() interface{} {
 }
 
 func (q Queue) Last() interface{} {
-	return q[len(q) - 1]
+	return q[len(q)-1]
 }
 
 type Queuer interface {
