@@ -60,8 +60,8 @@ func TestTrunc(t *testing.T) {
 		q2 = q2.Enqueue(i)
 	}
 
-	t.Log(q, cap(q), len(q))
-	t.Log(q2, cap(q2), len(q2))
+	t.Log(q, len(q), cap(q))
+	t.Log(q2, len(q2), cap(q2))
 	assert.Lessf(t, cap(q2), cap(q) + 24, "Queue should be truncated %v %v", q, q2)
 	t.Log(itemQueueTruncCount)
 	assert.Greaterf(t, itemQueueTruncCount, 0, "Truncate must have run at least once: %v", itemQueueTruncCount)
