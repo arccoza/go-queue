@@ -4,40 +4,36 @@ import (
 	// "fmt"
 	"math/rand"
 	// "github.com/k0kubun/pp"
+	"github.com/arccoza/go-queue/generic"
 )
 
-var TruncFreq int = 33
+var ItemQueueTruncFreq int = 33
 
-type Queue []interface{}
+type Item = generic.Type
 
-func New(cap int) Queuer {
-	return make(Queue, 0, cap)
+type ItemQueue []Item
+
+func NewItemQueue(cap int) ItemQueue {
+	return make(ItemQueue, 0, cap)
 }
 
-func (q Queue) Enqueue(items ...interface{}) Queuer {
+func (q ItemQueue) Enqueue(items ...Item) ItemQueue {
 	// Truncate queue
-	if rand.Intn(TruncFreq) == TruncFreq/2 {
-		q = append(make(Queue, 0, 2*(len(q)+len(items))), q...)
+	if rand.Intn(ItemQueueTruncFreq) == ItemQueueTruncFreq/2 {
+		q = append(make(ItemQueue, 0, 2*(len(q)+len(items))), q...)
 	}
 	return append(q, items...)
 }
 
-func (q Queue) Dequeue(items []interface{}) (Queuer, int) {
+func (q ItemQueue) Dequeue(items []Item) (ItemQueue, int) {
 	count := copy(items, q)
 	return q[count:], count
 }
 
-func (q Queue) First() interface{} {
+func (q ItemQueue) First() Item {
 	return q[0]
 }
 
-func (q Queue) Last() interface{} {
+func (q ItemQueue) Last() Item {
 	return q[len(q)-1]
-}
-
-type Queuer interface {
-	Enqueue(...interface{}) Queuer
-	Dequeue([]interface{}) (Queuer, int)
-	First() interface{}
-	Last() interface{}
 }

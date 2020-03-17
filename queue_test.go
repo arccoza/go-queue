@@ -9,8 +9,8 @@ import (
 
 func TestEnqueue(t *testing.T) {
 	src := []interface{}{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}
-	q := New(16)
-	want := Queue(src[:6])
+	q := NewItemQueue(16)
+	want := ItemQueue(src[:6])
 	got := q.Enqueue(src[:6]...)
 	t.Log(want)
 	t.Log(got)
@@ -20,9 +20,9 @@ func TestEnqueue(t *testing.T) {
 func TestDequeue(t *testing.T) {
 	src := []interface{}{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}
 	gotDest := make([]interface{}, 4)
-	q := New(16)
+	q := NewItemQueue(16)
 	q = q.Enqueue(src[:6]...)
-	wantQ, wantCount, wantDest := Queue(src[4:6]), 4, src[:4]
+	wantQ, wantCount, wantDest := ItemQueue(src[4:6]), 4, src[:4]
 	gotQ, gotCount := q.Dequeue(gotDest)
 	t.Log(wantQ, wantCount, wantDest)
 	t.Log(gotQ, gotCount, gotDest)
@@ -33,8 +33,8 @@ func TestDequeue(t *testing.T) {
 
 func TestFirst(t *testing.T) {
 	src := []interface{}{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}
-	q := New(16)
-	want := Queue(src[:6])[0]
+	q := NewItemQueue(16)
+	want := ItemQueue(src[:6])[0]
 	got := q.Enqueue(src[:6]...).First()
 	t.Log(want)
 	t.Log(got)
@@ -43,8 +43,8 @@ func TestFirst(t *testing.T) {
 
 func TestLast(t *testing.T) {
 	src := []interface{}{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}
-	q := New(16)
-	want := Queue(src[:6])[5]
+	q := NewItemQueue(16)
+	want := ItemQueue(src[:6])[5]
 	got := q.Enqueue(src[:6]...).Last()
 	t.Log(want)
 	t.Log(got)
