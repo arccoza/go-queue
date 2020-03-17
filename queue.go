@@ -8,7 +8,7 @@ import (
 )
 
 var ItemQueueTruncFreq int = 33
-var itemQueueTruncCount = 0
+var itemQueueTruncCount = 0 // For testing only
 
 type Item = generic.Type
 
