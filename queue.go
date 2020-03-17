@@ -8,7 +8,7 @@ import (
 )
 
 var ItemQueueTruncFreq int = 33
-var itemQueueTruncCount = 0 // For testing only
+var ItemQueueTruncCount = 0 // For testing only
 
 type Item = generic.Type
 
@@ -43,7 +43,7 @@ func (q ItemQueue) trunc(count int) ItemQueue {
 	if odds := (ItemQueueTruncFreq / count) + 2; rand.Intn(odds) == odds/2 {
 		q = append(make(ItemQueue, 0, len(q)+count), q...)
 		// pp.Println("TRUNC")
-		itemQueueTruncCount++
+		ItemQueueTruncCount++
 	}
 	return q
 }
