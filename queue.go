@@ -45,8 +45,3 @@ func (q ItemQueue) trunc(count int) ItemQueue {
 	}
 	return q
 }
-
-func minInt(a, b int) int {
-	if a < b { return a }
-	return b
-}
