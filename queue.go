@@ -8,6 +8,7 @@ import (
 )
 
 var ItemQueueTruncFreq int = 33
+var itemQueueTruncCount = 0
 
 type Item = generic.Type
 
@@ -18,11 +19,17 @@ func NewItemQueue(cap int) ItemQueue {
 }
 
 func (q ItemQueue) Enqueue(items ...Item) ItemQueue {
+	return append(q.trunc(2*(len(q)+len(items))), items...)
+}
+
+func (q ItemQueue) trunc(size int) ItemQueue {
 	// Truncate queue
 	if rand.Intn(ItemQueueTruncFreq) == ItemQueueTruncFreq/2 {
-		q = append(make(ItemQueue, 0, 2*(len(q)+len(items))), q...)
+		q = append(make(ItemQueue, 0, size), q...)
+		// pp.Println("TRUNC")
+		itemQueueTruncCount++
 	}
-	return append(q, items...)
+	return q
 }
 
 func (q ItemQueue) Dequeue(items []Item) (ItemQueue, int) {
