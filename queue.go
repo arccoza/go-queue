@@ -36,10 +36,12 @@ func (q ItemQueue) Last() Item {
 }
 
 func (q ItemQueue) trunc(count int) ItemQueue {
-	if count == 0 { return q }
+	if count == 0 {
+		return q
+	}
 	// Truncate queue
 	if odds := (ItemQueueTruncFreq / count) + 2; rand.Intn(odds) == odds/2 {
-		q = append(make(ItemQueue, 0, len(q) + count), q...)
+		q = append(make(ItemQueue, 0, len(q)+count), q...)
 		// pp.Println("TRUNC")
 		itemQueueTruncCount++
 	}

@@ -7,7 +7,7 @@ import (
 )
 
 func TestEnqueue(t *testing.T) {
-	src := []interface{}{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}
+	src := []interface{}{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}
 	q := NewItemQueue(16)
 	want := ItemQueue(src[:6])
 	got := q.Enqueue(src[:6]...)
@@ -17,7 +17,7 @@ func TestEnqueue(t *testing.T) {
 }
 
 func TestDequeue(t *testing.T) {
-	src := []interface{}{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}
+	src := []interface{}{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}
 	gotDest := make([]interface{}, 4)
 	q := NewItemQueue(16)
 	q = q.Enqueue(src[:6]...)
@@ -31,7 +31,7 @@ func TestDequeue(t *testing.T) {
 }
 
 func TestFirst(t *testing.T) {
-	src := []interface{}{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}
+	src := []interface{}{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}
 	q := NewItemQueue(16)
 	want := ItemQueue(src[:6])[0]
 	got := q.Enqueue(src[:6]...).First()
@@ -41,7 +41,7 @@ func TestFirst(t *testing.T) {
 }
 
 func TestLast(t *testing.T) {
-	src := []interface{}{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}
+	src := []interface{}{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}
 	q := NewItemQueue(16)
 	want := ItemQueue(src[:6])[5]
 	got := q.Enqueue(src[:6]...).Last()
@@ -52,7 +52,7 @@ func TestLast(t *testing.T) {
 
 func TestTrunc(t *testing.T) {
 	itemQueueTruncCount = 0
-	src := []interface{}{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}
+	src := []interface{}{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}
 	dest := make([]interface{}, 60)
 	q := NewItemQueue(16).Enqueue(src...).Enqueue(src...).Enqueue(src...).Enqueue(src...)
 
@@ -63,14 +63,14 @@ func TestTrunc(t *testing.T) {
 
 	t.Log(q, len(q), cap(q))
 	t.Log(q2, len(q2), cap(q2))
-	assert.Lessf(t, cap(q2), cap(q) + 24, "Queue should be truncated %v %v", q, q2)
+	assert.Lessf(t, cap(q2), cap(q)+24, "Queue should be truncated %v %v", q, q2)
 	t.Log(itemQueueTruncCount)
 	assert.Greaterf(t, itemQueueTruncCount, 0, "Truncate must have run at least once: %v", itemQueueTruncCount)
 }
 
 func TestTrunc2(t *testing.T) {
 	itemQueueTruncCount = 0
-	src := []interface{}{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}
+	src := []interface{}{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}
 	q := NewItemQueue(16).Enqueue(src...).Enqueue(src...).Enqueue(src...).Enqueue(src...).Enqueue(src...).Enqueue(src...).Enqueue(src...).Enqueue(src...)
 
 	dest := make([]interface{}, 8)
